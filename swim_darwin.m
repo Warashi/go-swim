@@ -22,12 +22,10 @@
 }
 
 - (void) update: (NSNotification*) notif {
-  NSLog(@"%@", notif);
   TISInputSourceRef currentInputSource = TISCopyCurrentKeyboardInputSource();
   NSString *sourceID = (__bridge NSString *)(TISGetInputSourceProperty(currentInputSource, kTISPropertyInputSourceID));
   current = [sourceID UTF8String];
   CFRelease(currentInputSource);
-  printf("%s\n", current);
 }
 
 - (const char*) current {
