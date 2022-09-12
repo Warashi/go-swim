@@ -22,19 +22,13 @@ func init() {
 	C.init()
 }
 
+func EventLoop() {
+	C.eventloop()
+}
+
 func Get() (string, error) {
-	ch := make(chan string)
-	go func() {
-		cstr := C.get()
-		ch <- C.GoString(cstr)
-	}()
-	select {
-	case ret := <-ch:
-		return ret, nil
-	default:
-		C.eventloop()
-	}
-	return <-ch, nil
+	cstr := C.get()
+	return C.GoString(cstr), nil
 }
 
 func Set(sourceID string) error {
