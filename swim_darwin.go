@@ -14,9 +14,9 @@ import (
 	"unsafe"
 )
 
-func Get() string {
+func Get() (string, error) {
 	cstr := C.get()
-	return C.GoString(cstr)
+	return C.GoString(cstr), nil
 }
 
 func Set(sourceID string) error {
